@@ -30,9 +30,9 @@ jobs:
         echo "AppName: ${{ env.CIGHA_APP_NAME }}"
 
     - name: site_flask_job_test__step_shell_ENV
-      run : pwd ; whoami ; env ; ps aux
+      run : pwd ; whoami ; env | sort ; ps aux
 
-    - name: site_flask_job_test__step_shell_ls_1
+    - name: site_flask_job_test__step_shell_UBUNTU_CODENAME=jammy
       run : cat /etc/*release* || true
 
     - name: site_flask_job_test__step_shell_ls_1
