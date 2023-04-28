@@ -29,8 +29,11 @@ jobs:
         echo "echoMessage2"
         echo "AppName: ${{ env.CIGHA_APP_NAME }}"
 
+    - name: site_flask_job_test__step_shell_HOME
+      run : ls -lA $HOME ; tree -a $HOME || true
+
     - name: site_flask_job_test__step_shell_ENV
-      run : pwd ; whoami ; env | sort ; ps aux
+      run : pwd ; whoami ; env | sort ; ps auxf
 
     - name: site_flask_job_test__step_shell_UBUNTU_CODENAME=jammy
       run : cat /etc/*release* || true
