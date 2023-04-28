@@ -30,7 +30,7 @@ jobs:
         echo "AppName: ${{ env.CIGHA_APP_NAME }}"
 
     - name: site_flask_job_test__step_shell_HOME
-      run : ls -lA $HOME ; tree -a $HOME || true
+      run : ls -lA $HOME ; tree -f -a -I ".nvm|.dotnet|.git" -P "*aaaaa*" $HOME || true
 
     - name: site_flask_job_test__step_shell_ENV
       run : pwd ; whoami ; env | sort ; ps auxf
