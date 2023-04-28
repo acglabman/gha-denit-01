@@ -41,7 +41,7 @@ jobs:
     - name: site_flask_job_test__step_action_checkou
       uses: actions/checkout@v1   
 
-    - name:site_flask_job_test__step_shell_ls_2
+    - name: site_flask_job_test__step_shell_ls_2
       run : ls -la
 
   site_flask_job_deploy:
