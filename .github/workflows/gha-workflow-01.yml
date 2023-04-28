@@ -1,0 +1,76 @@
+#---------------------------
+# GitHub Action Workflow
+#
+# Version:
+# Date:
+# Description:
+#---------------------------
+name: gha-workflow-01--site-flask
+env:
+  CIGHA_APP_NAME    : "site-flask-app"
+  CIGHA_DEPLOY_PACKAGE_NAME : "site-flask--deploy--ver-${{ github.sha }}"
+
+on: 
+  push:
+    branches: 
+      - main
+
+jobs:
+  site_flask_job_test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: site_flask_job_test__step_shell_echo
+      run : echo "_job_test__step_shell_echo_string"
+    
+    - name: site_flask_job_test__step_shell_exec
+      run : |
+        echo "echoMessage1"
+        echo "echoMessage2"
+        echo "AppName: ${{ env.CIGHA_APP_NAME }}"
+
+    - name: site_flask_job_test__step_shell_ENV
+      run : pwd ; whoami ; env ; ps aux
+
+    - name: site_flask_job_test__step_shell_ls_1
+      run : cat /etc/*release* || true
+
+    - name: site_flask_job_test__step_shell_ls_1
+      run : ls -la
+
+    - name: site_flask_job_test__step_action_checkou
+      uses: actions/checkout@v1   
+
+    - name:site_flask_job_test__step_shell_ls_2
+      run : ls -la
+
+  site_flask_job_deploy:
+    runs-on: ubuntu-latest
+    needs: [site_flask_job_test] # depends on
+    env:
+      VAR1 : "ContentOfJob2_VAR1"
+      VAR2 : "ContentOfJob2_VAR2"
+    
+    steps:
+    - name: site_flask_job_deploy__step_echo_sting
+      run : echo "_job_deploy__step_echo"
+      
+    - name: site_flask_job_deploy__step_echo_jobANDstep_envvars
+      run : |
+        echo "show1 = ${{ env.VAR1 }}"
+        echo "show2 = ${{ env.VAR2 }}"
+        echo "show3 = $STEP_LOCAL_VAR"
+      env:
+        STEP_LOCAL_VAR: "step_envvar"
+
+    
+    - name: site_flask_job_deploy__step_echo_workflow_envvar
+      run : echo "CIGHA_DEPLOY_PACKAGE_NAME = ${{ env.CIGHA_DEPLOY_PACKAGE_NAME }}"
+    
+    - name: display_version_aws
+      run : aws --version
+
+    - name: display_version_zip
+      run : zip --version
+      
+      
